@@ -1,0 +1,20 @@
+class Solution {
+    public int distinctSubseqII(String s) {
+        int MOD = 1_000_000_007;
+        int[] dp = new int[26];
+        int total = 0;
+        
+        for (char c : s.toCharArray()) {
+            int newDp = (total + 1) % MOD;
+            
+            int oldDp = dp[c - 'a'];
+            
+            total = (total - oldDp + MOD) % MOD; 
+            total = (total + newDp) % MOD;
+            
+            dp[c - 'a'] = newDp;
+        }
+        
+        return total;
+    }
+}
